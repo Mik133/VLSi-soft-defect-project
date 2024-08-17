@@ -77,7 +77,7 @@ for transistor in all_transitors:
 # End of transistor creation
 
 # Write new netlist with transistors
-with open("resistors_fo_mc_NAND4_domino_kupdated", "w") as netlist_with_defects:
+with open(netlist_file+"_with_soft_defects", "w") as netlist_with_defects:
     netlist_with_defects.write(f"{res_def}")
     for resistor in all_resistors:
         netlist_with_defects.write(f"{resistor}\n\n")
