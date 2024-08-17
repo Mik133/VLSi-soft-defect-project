@@ -1,8 +1,30 @@
+import os
 import random
 from copy import deepcopy
 
+files_dict = {}
+file_num = 1
+for n_file in os.listdir(os.curdir):
+    files_dict[file_num] = n_file
+    file_num += 1
+
+print("Please select your netlist file:")
+for file_index, n_file in files_dict.items():
+    print("%d: %s" % (file_index, n_file))
+
+file_index = input("Enter the netlist file index as shown on console:")
+while True:
+    if int(file_index) < len(files_dict) and files_dict[int(file_index)].find('netlist') >= 0:
+        netlist_file = files_dict[int(file_index)]
+        break
+    else:
+        file_index = input("Your input is invalid please try again")
+
+print("The netlist file selected is: ", netlist_file)
+
 # Extracting transistors for netlist file
-with open("NAND4_keeper_updated", "r") as netlist:
+with open(netlist_file, "r") as netlist:
+    print("Starting the netlist editor...")
     netlist_data = netlist.read()
 
 transistors_ports = {"DRAIN": "", "GATE": "", "SOURCE": "", "BULK": ""}
